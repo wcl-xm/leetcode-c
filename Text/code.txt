@@ -1,0 +1,177 @@
+*************test1:
+
+ORG 0000H
+AJMP START
+ORG 0100H
+START:MOV A,#66H
+MOV R0,#22H
+MOV @R0,#5
+MOV A,20H
+XCHD A,@R0
+ORL 22H,#30H
+SWAP A
+ORL A,#30H
+MOV 2FH,A
+CLR 7FH
+SJMP $
+END
+
+*************test2:
+
+#include<reg51.h>
+#include<reg51.h>
+sbit d0=P2^0;
+sbit d1=P2^1;
+sbit d2=P2^2;
+sbit d3=P2^3;
+sbit d4=P2^4;
+sbit d5=P2^5;
+sbit d6=P2^6;
+sbit d7=P2^7;
+void main()
+{   
+   while(1)
+        {
+			d0=0,d1=0,d2=0,d3=0,d4=0,d5=0,d6=0,d7=0;
+			d0=1,d1=1,d2=1,d3=1,d4=1,d5=1,d6=1,d7=1;
+		}
+}
+
+
+*************test3:
+
+#include<reg51.h>
+#define uint unsigned int 
+#define uchar unsigned char 
+sbit d0=P2^0;
+sbit d1=P2^1;
+sbit d2=P2^2;
+sbit d3=P2^3;
+sbit d4=P2^4;
+sbit d5=P2^5;
+sbit d6=P2^6;
+sbit d7=P2^7;
+void delay(uint);
+void main()
+{   
+   while(1)
+        {
+			d0=0,d1=0,d2=0,d3=0,d4=0,d5=0,d6=0,d7=0;
+			delay(2500);
+			d0=1,d1=1,d2=1,d3=1,d4=1,d5=1,d6=1,d7=1;
+			delay(2500);
+		}
+}
+void delay(uint z)
+{	uint x;
+	uchar y;
+	for(x=z;x>0;x--)
+		for(y=200;y>0;y--);
+}
+
+
+*************test4:
+
+#include "reg52.h"			
+void delay(int i)
+{
+	while(i--);	
+}
+void main()
+{
+	int i;
+	P2=~0x01;
+	delay(60000); 
+	while(1)
+	{	
+		for(i=0;i<8;i++)
+		{
+			P2=~(0x01<<i);	
+			delay(60000); 
+		}
+
+	}
+}
+
+*************test5:
+
+#include "reg52.h"		
+sbit LSA=P2^2;
+sbit LSB=P2^3;
+sbit LSC=P2^4;
+char d[8]={0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07};
+void delay(int i);
+
+void main()
+{	
+	while(1)
+	{	
+		char i;
+		for(i=0;i<8;i++)
+		{
+			switch(i)
+			{
+				case(0):
+					LSA=0;LSB=0;LSC=0; break;
+				case(1):
+					LSA=1;LSB=0;LSC=0; break;
+				case(2):
+					LSA=0;LSB=1;LSC=0; break;
+				case(3):
+					LSA=1;LSB=1;LSC=0; break;
+				case(4):	
+					LSA=0;LSB=0;LSC=1; break;
+				case(5):
+					LSA=1;LSB=0;LSC=1; break;
+				case(6):
+					LSA=0;LSB=1;LSC=1; break;
+				case(7):
+					LSA=1;LSB=1;LSC=1; break;
+			}
+		P0=d[i];
+		delay(100); 
+		P0=0x00;
+		}
+	}		
+}
+
+void delay(int i)
+{
+	while(i--);	
+}
+
+
+*************test6:
+
+
+#include <reg52.h>	
+
+void delay(int i)
+{
+	while(i--);
+}
+
+void main()
+{
+	int i;
+	int f = 600;
+	while(1)
+	{
+		P2=0x00;
+		for(i=f;i>0;i--)
+		{
+			P2 = 0x00;
+			delay(i);
+			P2 = 0xFF;
+			delay(f-i);
+		}
+		P2=0xFF;
+		for(i = 0; i<f; i++)
+		{
+			P2 = 0x00;
+			delay(i);
+			P2 = 0xFF;
+			delay(f-i);
+		}
+	}
+}
