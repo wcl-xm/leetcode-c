@@ -12,7 +12,6 @@ typedef int ElemType;
  以下为增删查改过程。
 */
 
-
 typedef struct{
     ElemType *elem;
     int length;
