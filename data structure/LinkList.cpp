@@ -34,6 +34,10 @@ Status ListInsert(LinkList &L,int i,ElemType e)
     p->next = s;
     return OK;
 }
+/*
+TODO:to preview this windows type ,we can find a new map.
+FIXME:
+*/
 
 Status GetElem(LinkList L,int i, ElemType e)
 {
@@ -71,4 +75,4 @@ Status ListDelete(LinkList &L,int i)
     p->next = q->next;
     delete q;
     return OK;
-}
+}   
