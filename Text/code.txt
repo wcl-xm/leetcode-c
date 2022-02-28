@@ -70,7 +70,8 @@ void delay(uint z)
 }
 
 
-*************test4:
+*************test4://走马灯设置，从左向右8次移位。
+
 
 #include "reg52.h"			
 void delay(int i)
